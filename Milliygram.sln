@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milliygram.Web", "src\Milli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milliygram.Data", "src\Milliygram.Data\Milliygram.Data.csproj", "{64CBA346-3F91-434B-9196-F0A11E911B5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milliygram.Service", "src\Milliygram.Service\Milliygram.Service.csproj", "{A74AC033-2D14-4124-884C-8A0C8F9A6CE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{64CBA346-3F91-434B-9196-F0A11E911B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64CBA346-3F91-434B-9196-F0A11E911B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64CBA346-3F91-434B-9196-F0A11E911B5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74AC033-2D14-4124-884C-8A0C8F9A6CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74AC033-2D14-4124-884C-8A0C8F9A6CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74AC033-2D14-4124-884C-8A0C8F9A6CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74AC033-2D14-4124-884C-8A0C8F9A6CE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DB3663CE-D008-4E03-A2E6-FE2AD5DA2746} = {6C269245-DF43-473E-89F0-424DD154FF10}
 		{64CBA346-3F91-434B-9196-F0A11E911B5D} = {6C269245-DF43-473E-89F0-424DD154FF10}
+		{A74AC033-2D14-4124-884C-8A0C8F9A6CE4} = {6C269245-DF43-473E-89F0-424DD154FF10}
 	EndGlobalSection
 EndGlobal
