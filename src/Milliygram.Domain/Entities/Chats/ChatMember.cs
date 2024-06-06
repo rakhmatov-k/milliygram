@@ -1,6 +1,7 @@
 ﻿using Milliygram.Domain.Commons;
+using Milliygram.Domain.Entities.Users;
 
-namespace Milliygram.Domain.Entities;
+namespace Milliygram.Domain.Entities.Chats;
 
 public class ChatMember : Auditable
 {
