@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Milliygram.Data\Milliygram.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
