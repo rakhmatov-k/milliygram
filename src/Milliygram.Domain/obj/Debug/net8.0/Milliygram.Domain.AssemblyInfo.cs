@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Milliygram.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+febf8c8e0445703542a402b537db7d1078d4edd6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2306175cfc1b6512230b5d1d3c2973870e5a6527")]
 [assembly: System.Reflection.AssemblyProductAttribute("Milliygram.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Milliygram.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
