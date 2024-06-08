@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Milliygram.Domain\Milliygram.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
