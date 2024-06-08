@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Milliygram.Domain\Milliygram.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Messages\" />
+  </ItemGroup>
+
 </Project>

@@ -63,12 +63,9 @@ public class GroupDetailService
         return mapper.Map<GroupDetailViewModel>(existGroupDetail);
     }
 
-    public async Task<IPagedList<GroupDetailViewModel>> GetAllAsync(int? page, string search = null)
+    public async Task<IPagedList<GroupDetailViewModel>> GetAllAsync(int? page)
     {
         var groupDetails = unitOfWork.GroupDetails.SelectAsQueryable(includes: ["ChatGroup", "Picture"]);
-
-        if (!string.IsNullOrWhiteSpace(search))
-            groupDetails = groupDetails.Where(gd => gd.Description.ToLower().Contains(search.ToLower()));
 
         var pagedGroupDetails = await groupDetails.ToPagedListAsync(page ?? 1, 10);
 

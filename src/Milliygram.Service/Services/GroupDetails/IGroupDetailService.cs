@@ -9,5 +9,5 @@ public interface IGroupDetailService
     Task<GroupDetailViewModel> UpdateAsync(long id, GroupDetailUpdateModel updateModel);
     Task<bool> DeleteAsync(long id);
     Task<GroupDetailViewModel> GetByIdAsync(long id);
-    Task<IPagedList<GroupDetailViewModel>> GetAllAsync(int? page, string search = null);
+    Task<IPagedList<GroupDetailViewModel>> GetAllAsync(int? page);
 }
