@@ -1,4 +1,5 @@
 ﻿using Milliygram.Domain.Commons;
+using Milliygram.Domain.Entities.Chats;
 using Milliygram.Domain.Entities.Commons;
 
 namespace Milliygram.Domain.Entities.Users;
@@ -12,4 +13,5 @@ public class User : Auditable
     public string Password { get; set; }
     public long? PictureId { get; set; }
     public Asset Picture { get; set; }
+    IEnumerable<Chat> Chats { get; set; }
 }
