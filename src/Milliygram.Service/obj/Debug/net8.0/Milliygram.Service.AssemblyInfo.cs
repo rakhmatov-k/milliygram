@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Milliygram.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73284a0e9b1791d7305baf48e05d0c1ef6753715")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f42f27933def5c53d87d224f2eff29f241719cb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Milliygram.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Milliygram.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

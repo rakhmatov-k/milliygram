@@ -61,14 +61,11 @@ public class ChatService
         var chats = unitOfWork.Chats.SelectAsQueryable(includes: ["User", "ChatGroups", "ChatMembers", "Messages"]);
 
         if (!string.IsNullOrWhiteSpace(search))
-        {
-            var lowerCaseSearch = search.ToLower();
             chats = chats.Where(c =>
-                c.User.UserName.ToLower().Contains(lowerCaseSearch) ||
-                c.ChatGroups.Any(g => g.Name.ToLower().Contains(lowerCaseSearch)) ||
-                c.ChatMembers.Any(m => m.User.UserName.ToLower().Contains(lowerCaseSearch)) ||
-                c.Messages.Any(m => m.Content.ToLower().Contains(lowerCaseSearch)));
-        }
+                c.User.UserName.ToLower().Contains(search.ToLower()) ||
+                c.ChatGroups.Any(g => g.Name.ToLower().Contains(search.ToLower())) ||
+                c.ChatMembers.Any(m => m.User.UserName.ToLower().Contains(search.ToLower())) ||
+                c.Messages.Any(m => m.Content.ToLower().Contains(search.ToLower())));
 
         var pagedChats = await chats.ToPagedListAsync(page ?? 1, 10);
 
