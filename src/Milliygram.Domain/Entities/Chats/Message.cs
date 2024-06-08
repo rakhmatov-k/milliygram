@@ -9,7 +9,7 @@ public class Message : Auditable
 {
     public long SenderId { get; set; }
     public User User { get; set; }
-    public long ChatId {  get; set; }
+    public long ChatId { get; set; }
     public Chat Chat { get; set; }
     public string? Content { get; set; }
     public long AssetId { get; set; }

@@ -1,5 +1,4 @@
 ﻿using Milliygram.Domain.Commons;
-using Milliygram.Domain.Enums;
 
 namespace Milliygram.Domain.Entities.Chats;
 

@@ -7,9 +7,9 @@ namespace Milliygram.Data.DbContexts;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<DbContext> options) :base(options) { }
-    
-    public DbSet<User>Users { get; set; }
+    public AppDbContext(DbContextOptions<DbContext> options) : base(options) { }
+
+    public DbSet<User> Users { get; set; }
     public DbSet<UserDetail> UserDetails { get; set; }
     public DbSet<Asset> Assets { get; set; }
     public DbSet<Chat> Chats { get; set; }
