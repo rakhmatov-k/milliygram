@@ -8,7 +8,7 @@ using X.PagedList;
 
 namespace Milliygram.Service.Services.ChatGroups;
 
-public class ChatGroupService 
+public class ChatGroupService
     (IMapper mapper,
     IUnitOfWork unitOfWork) : IChatGroupService
 {

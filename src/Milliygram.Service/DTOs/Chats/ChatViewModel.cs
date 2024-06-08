@@ -11,5 +11,5 @@ public class ChatViewModel
     public ChatType ChatType { get; set; }
     public IEnumerable<ChatGroupViewModel> ChatGroups { get; set; }
     public IEnumerable<ChatMemberViewModel> ChatMembers { get; set; }
-    public IEnumerable<MessageViewModel> Messages { get; set; }  
+    public IEnumerable<MessageViewModel> Messages { get; set; }
 }

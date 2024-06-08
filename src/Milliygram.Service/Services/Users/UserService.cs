@@ -9,9 +9,9 @@ using X.PagedList;
 
 namespace Milliygram.Service.Services.Users;
 
-public class UserService 
+public class UserService
     (IMapper mapper,
-    IUnitOfWork unitOfWork): IUserService
+    IUnitOfWork unitOfWork) : IUserService
 {
     public async Task<UserViewModel> CreateAsync(UserCreateModel createModel)
     {
@@ -48,7 +48,7 @@ public class UserService
         var updatedUser = await unitOfWork.Users.UpdateAsync(existUser);
         await unitOfWork.SaveAsync();
 
-        return mapper.Map<UserViewModel> (updatedUser);
+        return mapper.Map<UserViewModel>(updatedUser);
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -57,7 +57,7 @@ public class UserService
            ?? throw new NotFoundException($"User is not found with this ID {id}");
 
         existUser.Delete();
-        await unitOfWork.Users.DeleteAsync(existUser); 
+        await unitOfWork.Users.DeleteAsync(existUser);
         await unitOfWork.SaveAsync();
 
         return true;
@@ -68,7 +68,7 @@ public class UserService
         var existUser = await unitOfWork.Users.SelectAsync(expression: u => u.Id == id, includes: ["Chats", "Picture"])
            ?? throw new NotFoundException($"User is not found with this ID {id}");
 
-        return mapper.Map<UserViewModel> (existUser);
+        return mapper.Map<UserViewModel>(existUser);
     }
 
 
@@ -76,7 +76,7 @@ public class UserService
     {
         var users = unitOfWork.Users.SelectAsQueryable(includes: ["Chats", "Picture"]);
 
-        if(string.IsNullOrWhiteSpace(search))
+        if (string.IsNullOrWhiteSpace(search))
             users = users.Where(u =>
             u.FirstName.ToLower().Contains(search.ToLower()) ||
             u.LastName.ToLower().Contains(search.ToLower()) ||

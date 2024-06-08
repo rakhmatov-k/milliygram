@@ -8,7 +8,7 @@ using X.PagedList;
 
 namespace Milliygram.Service.Services.UserDetails;
 
-public class UserDetailService 
+public class UserDetailService
     (IMapper mapper,
     IUnitOfWork unitOfWork) : IUserDetailService
 {

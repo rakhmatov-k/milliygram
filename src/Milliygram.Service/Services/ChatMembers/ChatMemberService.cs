@@ -8,9 +8,9 @@ using X.PagedList;
 
 namespace Milliygram.Service.Services.ChatMembers;
 
-public class ChatMemberService 
+public class ChatMemberService
     (IMapper mapper,
-    IUnitOfWork unitOfWork): IChatMemberService
+    IUnitOfWork unitOfWork) : IChatMemberService
 {
     public async Task<ChatMemberViewModel> CreateAsync(ChatMemberCreateModel createModel)
     {
