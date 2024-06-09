@@ -7,6 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Compile Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
+    <Content Remove="NewFolder\**" />
+    <Content Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
+    <None Remove="NewFolder\**" />
+    <None Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\mdb\css\mdb.dark.min.css.map" />
+    <None Include="wwwroot\lib\mdb\css\mdb.min.css.map" />
+    <None Include="wwwroot\lib\mdb\js\mdb.es.min.js" />
+    <None Include="wwwroot\lib\mdb\js\mdb.es.min.js.map" />
+    <None Include="wwwroot\lib\mdb\js\mdb.umd.min.js" />
+    <None Include="wwwroot\lib\mdb\js\mdb.umd.min.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,10 +36,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Milliygram.Data\Milliygram.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
