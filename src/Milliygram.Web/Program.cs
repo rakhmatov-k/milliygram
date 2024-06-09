@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Milliygram.Data.DbContexts;
+using Milliygram.Service.Mappers;
+using Milliygram.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(options =>
+        {
+            options.LoginPath = "/Accounts/Login"; 
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        });
+
+builder.Services.AddServices();
 
 var app = builder.Build();
 
@@ -22,6 +35,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

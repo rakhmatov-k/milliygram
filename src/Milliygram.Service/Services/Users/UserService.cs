@@ -86,4 +86,9 @@ public class UserService
 
         return mapper.Map<IPagedList<UserViewModel>>(pagedUsers);
     }
+
+    public Task<UserViewModel> LoginAsync(LoginModel loginModel)
+    {
+        throw new NotImplementedException();
+    }
 }

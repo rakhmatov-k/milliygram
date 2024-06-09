@@ -2,18 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
     <Compile Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
-    <Content Remove="NewFolder\**" />
     <Content Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
-    <None Remove="NewFolder\**" />
     <None Remove="wwwroot\lib\MDB5-STANDARD-UI-KIT-Free-7.3.0\**" />
   </ItemGroup>
 
@@ -36,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Milliygram.Data\Milliygram.Data.csproj" />
+    <ProjectReference Include="..\Milliygram.Service\Milliygram.Service.csproj" />
   </ItemGroup>
 
 </Project>
