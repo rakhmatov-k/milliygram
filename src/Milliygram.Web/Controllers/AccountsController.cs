@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Milliygram.Service.DTOs.Users;
 using Milliygram.Service.Services.Users;
@@ -70,5 +70,40 @@ public class AccountsController
             }
         }
             return View(loginModel);
+    }
+
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Register(UserCreateModel model)
+    {
+        try
+        {
+            var createdUser = await userService.CreateAsync(model);
+            var claims = new List<Claim>
+            {
+                new("Id", createdUser.Id.ToString()),
+                    new Claim("UserName", createdUser.UserName),
+                    new Claim(ClaimTypes.Role, "User"),
+                };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            AuthenticationProperties properties = new AuthenticationProperties()
+            {
+                AllowRefresh = true
+            };
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+
+            return RedirectToAction("Index", "Chats");
+        }
+        rgcatch(Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View();
+        }
     }
 }

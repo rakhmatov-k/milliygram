@@ -1,0 +1,70 @@
+﻿@using Milliygram.Service.DTOs.Users
+@model UserCreateModel
+
+@{
+    ViewBag.Title = "Register";
+}
+<br />
+<br />
+<h2 class="text-center">Register</h2>
+@* Display a summary of model errors *@
+<div asp-validation-summary="All" class="text-danger text-center"></div>
+
+<div class="d-flex justify-content-center">
+
+    <form class="custom-width" asp-action="Register" method="post">
+        <!-- FirstName input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="FirstName" class="form-control border" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+            <label class="form-label" for="FirstName">FirstName</label>
+        </div>
+
+        <!-- LastName input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="LastName" class="form-control border" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+            <label class="form-label" for="LastName">LastName</label>
+        </div>
+
+        <!-- Username input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="UserName" class="form-control border" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <label class="form-label" for="Username">Username</label>
+        </div>
+
+        <!-- Email input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="Email" class="form-control border" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <label class="form-label" for="Email">Email</label>
+        </div>
+
+        <!-- Password input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="Password" type="password" class="form-control border" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <label class="form-label" for="Password">Password</label>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-check d-flex justify-content-center mb-4">
+            <input asp-for="TermsAccepted" class="form-check-input me-2" />
+            <span asp-validation-for="TermsAccepted" class="text-danger"></span>
+            <label class="form-check-label" for="TermsAccepted">
+                I have read and agree to the terms
+            </label>
+        </div>
+
+        <!-- Submit button -->
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+    </form>
+</div>
+
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3">
+        @ViewData["ErrorMessage"]
+    </div>
+}
