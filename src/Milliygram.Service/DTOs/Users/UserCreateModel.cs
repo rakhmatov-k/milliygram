@@ -4,29 +4,20 @@ namespace Milliygram.Service.DTOs.Users;
 
 public class UserCreateModel
 {
-    [Required]
-    [Display(Name = "FirstName")]
+    [Required(ErrorMessage = "First name is required.")]
     public string FirstName { get; set; }
 
-    [Required]
-    [Display(Name = "LastName")]
+    [Required(ErrorMessage = "Last name is required.")]
     public string LastName { get; set; }
 
-    [Required]
-    [Display(Name = "UserName")]
+    [Required(ErrorMessage = "Username is required.")]
     public string UserName { get; set; }
 
-    [Required]
-    [EmailAddress]
-    [Display(Name = "Email")]
+    [Required(ErrorMessage = "Email is required.")]
+    [EmailAddress(ErrorMessage = "Invalid email address.")]
     public string Email { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Password is required.")]
     [DataType(DataType.Password)]
-    [Display(Name = "Password")]
     public string Password { get; set; }
-
-    [Required(ErrorMessage = "You must accept the terms and conditions.")]
-    [Display(Name = "I have read and agree to the terms")]
-    public bool TermsAccepted { get; set; }
 }

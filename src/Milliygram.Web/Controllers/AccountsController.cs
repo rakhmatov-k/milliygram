@@ -65,7 +65,7 @@ public class AccountsController
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
+                ViewData["ServiceError"] = ex.Message;
                 return View();
             }
         }
@@ -80,30 +80,40 @@ public class AccountsController
     [HttpPost]
     public async Task<IActionResult> Register(UserCreateModel model)
     {
-        try
+        if(ModelState.IsValid)
         {
-            var createdUser = await userService.CreateAsync(model);
-            var claims = new List<Claim>
+            try
             {
-                new("Id", createdUser.Id.ToString()),
-                    new Claim("UserName", createdUser.UserName),
-                    new Claim(ClaimTypes.Role, "User"),
+                var createdUser = await userService.CreateAsync(model);
+                var claims = new List<Claim>
+            {
+                new Claim("Id", createdUser.Id.ToString()),
+                new Claim("UserName", createdUser.UserName),
+                new Claim(ClaimTypes.Role, "User"),
+            };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                AuthenticationProperties properties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true
                 };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            AuthenticationProperties properties = new AuthenticationProperties()
-            {
-                AllowRefresh = true
-            };
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 
-            return RedirectToAction("Index", "Chats");
+                return RedirectToAction("Index", "Chats");
+            }
+            catch (Exception ex)
+            {
+                ViewData["ServiceError"] = ex.Message;
+                return View(model);
+            }
         }
-        rgcatch(Exception ex)
-        {
-            ModelState.AddModelError(string.Empty, ex.Message);
-            return View();
-        }
+        return View(model);
+    }
+
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+        return RedirectToAction("Login");
     }
 }
