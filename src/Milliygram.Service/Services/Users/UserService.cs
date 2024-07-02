@@ -16,7 +16,7 @@ public class UserService
     public async Task<UserViewModel> CreateAsync(UserCreateModel createModel)
     {
         var existUser = await unitOfWork.Users
-            .SelectAsync(u => u.Email == createModel.Email && u.UserName.ToLower() == createModel.UserName.ToLower());
+            .SelectAsync(u => u.Email == createModel.Email || u.UserName.ToLower() == createModel.UserName.ToLower());
 
         if (existUser is not null)
             throw new AlreadyExistException($"User is already exist with this email {createModel.Email} or username {createModel.UserName}");
@@ -37,7 +37,7 @@ public class UserService
             ?? throw new NotFoundException($"User is not found with this ID {id}");
 
         var alreadyExistUser = await unitOfWork.Users
-            .SelectAsync(u => u.Email == updateModel.Email && u.UserName.ToLower() == updateModel.UserName.ToLower() && u.Id != id);
+            .SelectAsync(u => u.Email == updateModel.Email || u.UserName.ToLower() == updateModel.UserName.ToLower() && u.Id != id);
 
         if (existUser is not null)
             throw new AlreadyExistException($"User is already exist with this email {updateModel.Email} or username {updateModel.UserName}");
@@ -85,5 +85,16 @@ public class UserService
         var pagedUsers = await users.ToPagedListAsync(page ?? 1, 10);
 
         return mapper.Map<IPagedList<UserViewModel>>(pagedUsers);
+    }
+
+    public async Task<UserViewModel> LoginAsync(LoginModel loginModel)
+    {
+        var existUser = await unitOfWork.Users.SelectAsync(u => u.UserName.ToLower() == loginModel.UserName.ToLower())
+            ?? throw new ArgumentIsNotValidException("UserName or Password incorrect");
+
+        if (!PasswordHasher.Verify(loginModel.Password, existUser.Password))
+            throw new ArgumentIsNotValidException("UserName or Password incorrect)");
+
+        return mapper.Map<UserViewModel>(existUser);
     }
 }

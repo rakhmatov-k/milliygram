@@ -1,0 +1,76 @@
+﻿@using Milliygram.Service.DTOs.Users
+@model LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+<br />
+<br />
+<h2 class="text-center">Login</h2>
+@* Display service error *@
+@if (ViewData["ServiceError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewData["ServiceError"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="d-flex justify-content-center">
+
+    <form class="custom-width" asp-action="Login" method="post">
+        <!-- UserName input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="UserName" class="form-control border" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <label class="form-label" for="UserName">UserName</label>
+        </div>
+
+        <!-- Password input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input asp-for="Password" class="form-control border" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <label class="form-label" for="Password">Password</label>
+        </div>
+
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example34" checked />
+                    <label class="form-check-label" for="form2Example34"> Remember me </label>
+                </div>
+            </div>
+
+            <div class="col">
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+        <!-- Register buttons -->
+        <div class="text-center">
+            <p>Not a member? <a asp-controller="Accounts" asp-action="Register">Register</a></p>
+            <p>or sign up with:</p>
+            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                <i class="fab fa-facebook-f"></i>
+            </button>
+
+            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                <i class="fab fa-google"></i>
+            </button>
+
+            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                <i class="fab fa-twitter"></i>
+            </button>
+
+            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                <i class="fab fa-github"></i>
+            </button>
+        </div>
+    </form>
+</div>

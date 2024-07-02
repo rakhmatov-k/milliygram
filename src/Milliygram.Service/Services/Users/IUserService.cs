@@ -10,4 +10,5 @@ public interface IUserService
     Task<bool> DeleteAsync(long id);
     Task<UserViewModel> GetByIdAsync(long id);
     Task<IPagedList<UserViewModel>> GetAllAsync(int? page, string search = null);
+    Task<UserViewModel> LoginAsync(LoginModel loginModel);
 }
