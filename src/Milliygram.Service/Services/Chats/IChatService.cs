@@ -9,5 +9,5 @@ public interface IChatService
     Task<ChatViewModel> UpdateAsync(long id, ChatUpdateModel updateModel);
     Task<bool> DeleteAsync(long id);
     Task<ChatViewModel> GetByIdAsync(long id);
-    Task<IPagedList<ChatViewModel>> GetAllAsync(int? page, string search = null);
+    Task<IEnumerable<ChatViewModel>> GetAllAsync(long UserId, string search = null);
 }

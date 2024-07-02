@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Milliygram.Data.UnitOfWorks;
 using Milliygram.Domain.Entities.Chats;
 using Milliygram.Service.DTOs.Chats;
 using Milliygram.Service.Exceptions;
 using Milliygram.Service.Extensions;
-using X.PagedList;
 
 namespace Milliygram.Service.Services.Chats;
 public class ChatService
@@ -56,19 +56,17 @@ public class ChatService
         return mapper.Map<ChatViewModel>(existChat);
     }
 
-    public async Task<IPagedList<ChatViewModel>> GetAllAsync(int? page, string search = null)
+    public async Task<IEnumerable<ChatViewModel>> GetAllAsync(long UserId, string search)
     {
-        var chats = unitOfWork.Chats.SelectAsQueryable(includes: ["User", "ChatGroups", "ChatMembers", "Messages"]);
+        var chats = unitOfWork.Chats
+            .SelectAsQueryable(expression:ch => ch.UserId == UserId, includes: ["ChatGroups", "ChatMembers", "Messages"]);
 
         if (!string.IsNullOrWhiteSpace(search))
             chats = chats.Where(c =>
                 c.User.UserName.ToLower().Contains(search.ToLower()) ||
                 c.ChatGroups.Any(g => g.Name.ToLower().Contains(search.ToLower())) ||
-                c.ChatMembers.Any(m => m.User.UserName.ToLower().Contains(search.ToLower())) ||
-                c.Messages.Any(m => m.Content.ToLower().Contains(search.ToLower())));
+                c.ChatMembers.Any(m => m.User.UserName.ToLower().Contains(search.ToLower())));
 
-        var pagedChats = await chats.ToPagedListAsync(page ?? 1, 10);
-
-        return mapper.Map<IPagedList<ChatViewModel>>(pagedChats);
+        return mapper.Map<IEnumerable<ChatViewModel>>(await chats.ToListAsync());
     }
 }

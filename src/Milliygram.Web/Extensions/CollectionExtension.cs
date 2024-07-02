@@ -1,4 +1,5 @@
 ﻿using Milliygram.Data.UnitOfWorks;
+using Milliygram.Service.Services.Chats;
 using Milliygram.Service.Services.Users;
 
 namespace Milliygram.Web.Extensions;
@@ -9,5 +10,6 @@ public static class CollectionExtension
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IChatService, ChatService>();
     }
 }
