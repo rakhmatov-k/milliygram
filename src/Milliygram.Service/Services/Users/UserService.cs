@@ -65,7 +65,7 @@ public class UserService
 
     public async Task<UserViewModel> GetByIdAsync(long id)
     {
-        var existUser = await unitOfWork.Users.SelectAsync(expression: u => u.Id == id, includes: ["Chats", "Picture"])
+        var existUser = await unitOfWork.Users.SelectAsync(expression: u => u.Id == id, includes: ["Chats", "Picture", "Detail"])
            ?? throw new NotFoundException($"User is not found with this ID {id}");
 
         return mapper.Map<UserViewModel>(existUser);
@@ -74,7 +74,7 @@ public class UserService
 
     public async Task<IPagedList<UserViewModel>> GetAllAsync(int? page, string search = null)
     {
-        var users = unitOfWork.Users.SelectAsQueryable(includes: ["Chats", "Picture"]);
+        var users = unitOfWork.Users.SelectAsQueryable(includes: ["Chats", "Picture", "Detail"]);
 
         if (string.IsNullOrWhiteSpace(search))
             users = users.Where(u =>

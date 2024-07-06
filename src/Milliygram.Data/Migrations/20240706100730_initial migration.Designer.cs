@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Milliygram.Data.DbContexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240706100730_initial migration")]
+    partial class initialmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -413,7 +416,7 @@ namespace Milliygram.Data.Migrations
             modelBuilder.Entity("Milliygram.Domain.Entities.Chats.Chat", b =>
                 {
                     b.HasOne("Milliygram.Domain.Entities.Users.User", "User")
-                        .WithMany("Chats")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -524,8 +527,6 @@ namespace Milliygram.Data.Migrations
 
             modelBuilder.Entity("Milliygram.Domain.Entities.Users.User", b =>
                 {
-                    b.Navigation("Chats");
-
                     b.Navigation("Detail");
                 });
 #pragma warning restore 612, 618

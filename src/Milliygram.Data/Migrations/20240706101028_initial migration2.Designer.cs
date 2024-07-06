@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240608185058_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20240706101028_initial migration2")]
+    partial class initialmigration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,12 @@ namespace Milliygram.Data.Migrations
                     b.Property<long?>("UpdatedByUserId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Chats");
                 });
@@ -402,15 +407,27 @@ namespace Milliygram.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("UserDetails");
+                });
+
+            modelBuilder.Entity("Milliygram.Domain.Entities.Chats.Chat", b =>
+                {
+                    b.HasOne("Milliygram.Domain.Entities.Users.User", "User")
+                        .WithMany("Chats")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Milliygram.Domain.Entities.Chats.ChatGroup", b =>
                 {
                     b.HasOne("Milliygram.Domain.Entities.Chats.Chat", "Chat")
-                        .WithMany()
+                        .WithMany("ChatGroups")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -421,7 +438,7 @@ namespace Milliygram.Data.Migrations
             modelBuilder.Entity("Milliygram.Domain.Entities.Chats.ChatMember", b =>
                 {
                     b.HasOne("Milliygram.Domain.Entities.Chats.Chat", "Chat")
-                        .WithMany()
+                        .WithMany("ChatMembers")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -463,7 +480,7 @@ namespace Milliygram.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Milliygram.Domain.Entities.Chats.Chat", "Chat")
-                        .WithMany()
+                        .WithMany("Messages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -491,12 +508,28 @@ namespace Milliygram.Data.Migrations
             modelBuilder.Entity("Milliygram.Domain.Entities.Users.UserDetail", b =>
                 {
                     b.HasOne("Milliygram.Domain.Entities.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne("Detail")
+                        .HasForeignKey("Milliygram.Domain.Entities.Users.UserDetail", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Milliygram.Domain.Entities.Chats.Chat", b =>
+                {
+                    b.Navigation("ChatGroups");
+
+                    b.Navigation("ChatMembers");
+
+                    b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("Milliygram.Domain.Entities.Users.User", b =>
+                {
+                    b.Navigation("Chats");
+
+                    b.Navigation("Detail");
                 });
 #pragma warning restore 612, 618
         }

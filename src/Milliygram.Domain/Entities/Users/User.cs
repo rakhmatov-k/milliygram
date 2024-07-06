@@ -13,5 +13,6 @@ public class User : Auditable
     public string Password { get; set; }
     public long? PictureId { get; set; }
     public Asset Picture { get; set; }
-    IEnumerable<Chat> Chats { get; set; }
+    public UserDetail Detail { get; set; }
+    public IEnumerable<Chat> Chats { get; set; }
 }

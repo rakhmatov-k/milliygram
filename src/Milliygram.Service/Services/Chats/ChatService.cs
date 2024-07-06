@@ -50,7 +50,7 @@ public class ChatService
 
     public async Task<ChatViewModel> GetByIdAsync(long id)
     {
-        var existChat = await unitOfWork.Chats.SelectAsync(c => c.Id == id, includes: ["User", "ChatGroups", "ChatMembers", "Messages"])
+        var existChat = await unitOfWork.Chats.SelectAsync(c => c.Id == id, includes: ["ChatGroups", "ChatMembers", "Messages"])
             ?? throw new NotFoundException($"Chat is not found with this ID {id}");
 
         return mapper.Map<ChatViewModel>(existChat);
