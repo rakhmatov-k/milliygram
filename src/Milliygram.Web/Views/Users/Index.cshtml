@@ -1,6 +1,7 @@
-﻿@model ChatListModel
+﻿@using Milliygram.Service.DTOs.Users
+@model UserViewModel
 
-<div class="page-wrapper chiller-theme toggled">
+<div class="page-wrapper chiller-theme">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
@@ -8,22 +9,30 @@
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
-                <a asp-controller="Chats" asp-action="Index">Milliygram</a>
+                <a asp-controller="Users" asp-action="Index">Milliygram</a>
                 <div id="close-sidebar">
                     <i class="fas fa-times"></i>
                 </div>
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
-                    <img class="img-responsive img-rounded" src="https://assets.leetcode.com/users/default_avatar.jpg"
-                         alt="User picture">
+                    @if(Model.Picture is null)
+                    {
+                        <img class="img-responsive img-rounded" src="https://assets.leetcode.com/users/default_avatar.jpg"
+                        alt="User picture">
+                    }
+                    else
+                    {
+                        <img class="img-responsive img-rounded" src=@Model.Picture.Path
+                             alt="User picture">
+                    }
                 </div>
                 <div class="user-info">
                     <span class="user-name">
-                        
-                        <strong>Smith</strong>
+                        @Model.FirstName
+                        <strong>@Model.LastName</strong>
                     </span>
-                    <span class="user-role">Administrator</span>
+                    <span class="user-role">@Model.UserName</span>
                     <span class="user-status">
                         <i class="fa fa-circle"></i>
                         <span>Online</span>
@@ -37,20 +46,20 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-tachometer-alt"></i>
+                            <i class="fas fa-users"></i> <!-- New Group icon -->
                             <span>New Group</span>
                             <span class="badge badge-pill badge-warning">New</span>
                         </a>
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="far fa-gem"></i>
+                            <i class="fas fa-user-friends"></i> <!-- Friends icon -->
                             <span>Friends</span>
                         </a>
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-chart-line"></i>
+                            <i class="fas fa-cog"></i> <!-- Settings icon -->
                             <span>Settings</span>
                         </a>
                     </li>
@@ -60,6 +69,6 @@
     </nav>
 
     <main>
-        <h1>Welocome</h1>
+        <h1>Welcome</h1>
     </main>
 </div>

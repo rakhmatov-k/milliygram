@@ -61,7 +61,7 @@ public class AccountsController
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity));
 
-                return RedirectToAction("Index", "Chats");
+                return RedirectToAction("Index", "Users");
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@ public class AccountsController
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 
-                return RedirectToAction("Index", "Chats");
+                return RedirectToAction("Index", "Users");
             }
             catch (Exception ex)
             {

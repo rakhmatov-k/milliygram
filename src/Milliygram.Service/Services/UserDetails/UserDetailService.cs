@@ -57,7 +57,7 @@ public class UserDetailService
 
     public async Task<UserDetailViewModel> GetByIdAsync(long id)
     {
-        var existUserDetail = await unitOfWork.UserDetails.SelectAsync(ud => ud.Id == id, includes: ["User"])
+        var existUserDetail = await unitOfWork.UserDetails.SelectAsync(ud => ud.Id == id)
             ?? throw new NotFoundException($"UserDetail not found with ID {id}");
 
         return mapper.Map<UserDetailViewModel>(existUserDetail);
@@ -65,7 +65,7 @@ public class UserDetailService
 
     public async Task<IPagedList<UserDetailViewModel>> GetAllAsync(int? page)
     {
-        var userDetails = unitOfWork.UserDetails.SelectAsQueryable(includes: ["User"]);
+        var userDetails = unitOfWork.UserDetails.SelectAsQueryable();
 
         var pagedUserDetails = await userDetails.ToPagedListAsync(page ?? 1, 10);
 
