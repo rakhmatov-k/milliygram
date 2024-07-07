@@ -15,4 +15,5 @@ public class User : Auditable
     public Asset Picture { get; set; }
     public UserDetail Detail { get; set; }
     public IEnumerable<Chat> Chats { get; set; }
+    //public IEnumerable<Friend> Friends { get; set; }
 }

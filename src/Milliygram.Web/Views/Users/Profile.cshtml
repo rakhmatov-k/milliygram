@@ -1,0 +1,41 @@
+﻿@using Milliygram.Service.DTOs.Users
+@model UserViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<section class="w-100 px-4 py-5" style="background-color: #9de2ff; border-radius: .5rem .5rem 0 0;">
+    <div class="row d-flex justify-content-center">
+        <div class="col col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            @if (Model.Picture is null)
+                            {
+                                <img src="https://assets.leetcode.com/users/default_avatar.jpg"
+                                     alt="Profile picture" class="img-fluid" style="width: 180px; border-radius: 10px;">
+                            }
+                            else
+                            {
+                                <img src="@Model.Picture.Path"
+                                     alt="Profile picture" class="img-fluid" style="width: 180px; border-radius: 10px;">
+                            }
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="mb-1">@Model.FirstName @Model.LastName</h5>
+                            <p class="mb-2 pb-1">@Model.Detail?.Bio</p>
+                            <p class="mb-2 pb-1">@Model.Detail?.Location</p>
+                            <p class="mb-2 pb-1">@Model.Detail?.DateOfBirth?.ToString("d MMM yyyy")</p>
+                            <div class="d-flex pt-1">
+                                <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                                <button type="button" class="btn btn-primary flex-grow-1">Friend</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,60 @@
+﻿@using Milliygram.Service.DTOs.Users
+@model UserModel
+
+<div>
+    <h4 class="pb-4 border-bottom">Account settings</h4>
+    <form asp-action="Users" method="Settings" class="form-border-0">
+        <div class="d-flex align-items-start py-3 border-bottom">
+            @if (Model.Picture is null)
+            {
+                <img src="https://assets.leetcode.com/users/default_avatar.jpg"
+                     class="img" alt="Profile picture">
+            }
+            else
+            {
+                <img src="@Model.Picture.Path"
+                     class="img" alt="Profile picture">
+            }
+            <div class="pl-sm-4 pl-2" id="img-section">
+                <b>Profile Photo</b>
+                <button class="btn button border"><b>Upload</b></button>
+            </div>
+        </div>
+        <div class="py-2">
+            <div class="row py-2">
+                <div class="col-md-6">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="bg-light form-control" asp-for="@Model.User.FirstName" placeholder="@Model.User.FirstName">
+                </div>
+                <div class="col-md-6 pt-md-0 pt-3">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="bg-light form-control" asp-for="@Model.User.LastName" placeholder="@Model.User.LastName">
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-md-6">
+                    <label for="username">User Name</label>
+                    <input type="text" class="bg-light form-control" asp-for="@Model.User.UserName" placeholder="@Model.User.UserName">
+                </div>
+                <div class="col-md-6 pt-md-0 pt-3">
+                    <label for="bio">Bio</label>
+                    <input type="text" class="bg-light form-control bio-button" asp-for="@Model.User.Detail.Bio" placeholder="@Model.User.Detail?.Bio">
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-md-6">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" class="bg-light form-control" asp-for="@Model.User.Detail.DateOfBirth" placeholder="@Model.User.Detail?.DateOfBirth?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-6 pt-md-0 pt-3">
+                    <label for="location">Location</label>
+                    <input type="text" class="bg-light form-control" asp-for="@Model.User.Detail.Location" placeholder="@Model.User.Detail?.Location">
+                </div>
+            </div>
+            <div class="py-3 pb-4 border-bottom">
+                <button class="btn btn-primary mr-3" type="submit">Save Changes</button>
+                <button class="btn border button" type="button">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

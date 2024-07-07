@@ -5,6 +5,7 @@ using Milliygram.Service.DTOs.Users;
 using Milliygram.Service.Exceptions;
 using Milliygram.Service.Extensions;
 using Milliygram.Service.Helpers;
+using Milliygram.Service.Services.UserDetails;
 using X.PagedList;
 
 namespace Milliygram.Service.Services.Users;
