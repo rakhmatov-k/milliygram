@@ -1,15 +1,84 @@
 ﻿@using Milliygram.Service.DTOs.Users
 @model UserViewModel
 
-@{
-    Layout = "_Layout";
-}
-
-
 <div class="page-wrapper chiller-theme">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
+
+    <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+            <div class="sidebar-brand">
+                <a asp-controller="Users" asp-action="Index">Milliygram</a>
+                <div id="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="sidebar-header">
+                <div class="user-pic">
+                    @if (Model.Picture is null)
+                    {
+                        <img class="img-responsive img-rounded" src="https://assets.leetcode.com/users/default_avatar.jpg"
+                             alt="User picture">
+                    }
+                    else
+                    {
+                        <img class="img-responsive img-rounded" src=@Model.Picture.Path
+                             alt="User picture">
+                    }
+                </div>
+                <div class="user-info">
+                    <span class="user-name">
+                        @Model.FirstName
+                        <strong>@Model.LastName</strong>
+                    </span>
+                    <span class="user-role">@Model.UserName</span>
+                    <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                    </span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="header-menu">
+                        <span>General</span>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="/Users/Profile">
+                            <i class="fas fa-user"></i> <!-- Profile icon -->
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-users"></i> <!-- New Group icon -->
+                            <span>New Group</span>
+                            <span class="badge badge-pill badge-warning">New</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fas fa-user-friends"></i> <!-- Friends icon -->
+                            <span>Friends</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="/Users/Settings">
+                            <i class="fas fa-cog"></i> <!-- Settings icon -->
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="/Users/Security">
+                            <i class="fas fa-shield-alt"></i> <!-- Security icon -->
+                            <span>Security</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <h1>Welcome</h1>

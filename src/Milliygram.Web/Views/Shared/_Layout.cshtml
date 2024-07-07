@@ -13,15 +13,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <style>
-        .page-wrapper.toggled #sidebar {
-            display: block;
-        }
-
-        #sidebar {
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -59,99 +50,11 @@
             </div>
         </nav>
     </header>
-
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="page-wrapper chiller-theme">
-            <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-                <i class="fas fa-bars"></i>
-            </a>
-
-            <nav id="sidebar" class="sidebar-wrapper">
-                <div class="sidebar-content">
-                    <div class="sidebar-brand">
-                        <a asp-controller="Users" asp-action="Index">Milliygram</a>
-                        <div id="close-sidebar">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </div>
-                    <div class="sidebar-header">
-                        <div class="user-pic">
-                            @if (ViewBag.User?.Picture is null)
-                            {
-                                <img class="img-responsive img-rounded" src="https://assets.leetcode.com/users/default_avatar.jpg"
-                                     alt="User picture">
-                            }
-                            else
-                            {
-                                <img class="img-responsive img-rounded" src=@ViewBag.User.Picture.Path
-                                     alt="User picture">
-                            }
-                        </div>
-                        <div class="user-info">
-                            <span class="user-name">
-                                @ViewBag.User?.FirstName
-                                <strong>@ViewBag.User?.LastName</strong>
-                            </span>
-                            <span class="user-role">@ViewBag.User?.UserName</span>
-                            <span class="user-status">
-                                <i class="fa fa-circle"></i>
-                                <span>Online</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="sidebar-menu">
-                        <ul>
-                            <li class="header-menu">
-                                <span>General</span>
-                            </li>
-                            <li class="sidebar-dropdown">
-                                <a href="/Users/Profile">
-                                    <i class="fas fa-user"></i> <!-- Profile icon -->
-                                    <span>Profile</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fas fa-users"></i> <!-- New Group icon -->
-                                    <span>New Group</span>
-                                    <span class="badge badge-pill badge-warning">New</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fas fa-user-friends"></i> <!-- Friends icon -->
-                                    <span>Friends</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown">
-                                <a href="/Users/Settings">
-                                    <i class="fas fa-cog"></i> <!-- Settings icon -->
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="main-content">
-                <div class="container">
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
-                </div>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-    }
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -187,4 +90,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
