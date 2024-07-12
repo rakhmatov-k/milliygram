@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240706100730_initial migration")]
-    partial class initialmigration
+    [Migration("20240712184050_Initial-Migration 2")]
+    partial class InitialMigration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -308,6 +308,18 @@ namespace Milliygram.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Assets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedByUserId = 0L,
+                            FileType = 0,
+                            IsDeleted = false,
+                            Name = "Default_Images",
+                            Path = "assets\\Images\\Default_Images.jpg"
+                        });
                 });
 
             modelBuilder.Entity("Milliygram.Domain.Entities.Users.User", b =>
@@ -381,8 +393,8 @@ namespace Milliygram.Data.Migrations
                     b.Property<long>("CreatedByUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
@@ -416,7 +428,7 @@ namespace Milliygram.Data.Migrations
             modelBuilder.Entity("Milliygram.Domain.Entities.Chats.Chat", b =>
                 {
                     b.HasOne("Milliygram.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Chats")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -527,6 +539,8 @@ namespace Milliygram.Data.Migrations
 
             modelBuilder.Entity("Milliygram.Domain.Entities.Users.User", b =>
                 {
+                    b.Navigation("Chats");
+
                     b.Navigation("Detail");
                 });
 #pragma warning restore 612, 618

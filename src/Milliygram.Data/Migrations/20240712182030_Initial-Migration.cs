@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -257,6 +257,11 @@ namespace Milliygram.Data.Migrations
                         principalTable: "ChatGroups",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Assets",
+                columns: new[] { "Id", "CreatedAt", "CreatedByUserId", "DeletedAt", "DeletedByUserId", "FileType", "IsDeleted", "Name", "Path", "UpdatedAt", "UpdatedByUserId" },
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, null, null, 0, false, "Default_Images", "assets\\Images\\Default_Images.jpg", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChatGroups_ChatId",

@@ -305,6 +305,18 @@ namespace Milliygram.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Assets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedByUserId = 0L,
+                            FileType = 0,
+                            IsDeleted = false,
+                            Name = "Default_Images",
+                            Path = "assets\\Images\\Default_Images.jpg"
+                        });
                 });
 
             modelBuilder.Entity("Milliygram.Domain.Entities.Users.User", b =>
@@ -378,8 +390,8 @@ namespace Milliygram.Data.Migrations
                     b.Property<long>("CreatedByUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");

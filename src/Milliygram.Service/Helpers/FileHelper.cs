@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Milliygram.Domain.Entities.Commons;
 using Milliygram.Domain.Enums;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Milliygram.Service.Helpers;
 
@@ -7,7 +9,7 @@ public static class FileHelper
 {
     public static async Task<(string Path, string Name)> CreateFileAsync(IFormFile file, FileType type)
     {
-        var directoryPath = Path.Combine(EnvironmentHelper.WebRootPath, type.ToString());
+        var directoryPath = Path.Combine(EnvironmentHelper.WebRootPath,"Assets", type.ToString());
         if (!Directory.Exists(directoryPath))
             Directory.CreateDirectory(directoryPath);
 

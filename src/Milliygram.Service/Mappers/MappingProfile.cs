@@ -27,6 +27,7 @@ public class MappingProfile : Profile
         CreateMap<UserDetailCreateModel, UserDetail>().ReverseMap();
         CreateMap<UserDetailUpdateModel, UserDetail>().ReverseMap();
         CreateMap<UserDetail, UserDetailViewModel>().ReverseMap();
+        CreateMap<UserDetailUpdateModel, UserDetailViewModel>().ReverseMap();
 
         CreateMap<ChatCreateModel, Chat>().ReverseMap();
         CreateMap<ChatUpdateModel, Chat>().ReverseMap();

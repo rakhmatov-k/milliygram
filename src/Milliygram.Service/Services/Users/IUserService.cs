@@ -1,4 +1,5 @@
-﻿using Milliygram.Service.DTOs.Users;
+﻿using Milliygram.Service.DTOs.Assets;
+using Milliygram.Service.DTOs.Users;
 using X.PagedList;
 
 namespace Milliygram.Service.Services.Users;
@@ -11,4 +12,6 @@ public interface IUserService
     Task<UserViewModel> GetByIdAsync(long id);
     Task<IPagedList<UserViewModel>> GetAllAsync(int? page, string search = null);
     Task<UserViewModel> LoginAsync(LoginModel loginModel);
+    Task<UserViewModel> UploadPictureAsync(long id, AssetCreateModel assetCreateModel);
+    Task<UserViewModel> DeletePictureAsync(long id);
 }

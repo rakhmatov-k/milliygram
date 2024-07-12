@@ -17,6 +17,7 @@ public class AssetService(IMapper mapper, IUnitOfWork unitOfWork) : IAssetServic
         {
             Name = assetData.Name,
             Path = assetData.Path,
+            FileType = model.FileType
         };
 
         asset.Create();

@@ -5,7 +5,6 @@
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
-
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
@@ -16,17 +15,9 @@
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
-                    @if (Model.Picture is null)
-                    {
-                        <img class="img-responsive img-rounded" src="https://assets.leetcode.com/users/default_avatar.jpg"
-                             alt="User picture">
-                    }
-                    else
-                    {
-                        <img class="img-responsive img-rounded" src=@Model.Picture.Path
-                             alt="User picture">
-                    }
+                    <img class="img-responsive img-rounded" src=@Model.Picture.Path alt="User picture">
                 </div>
+
                 <div class="user-info">
                     <span class="user-name">
                         @Model.FirstName

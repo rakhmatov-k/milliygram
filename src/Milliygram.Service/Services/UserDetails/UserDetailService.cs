@@ -26,23 +26,7 @@ public class UserDetailService
         return mapper.Map<UserDetailViewModel>(createdUserDetail);
     }
 
-    public async Task<UserDetailViewModel> UpdateAsync(long id, UserDetailUpdateModel updateModel)
-    {
-        var existUserDetail = await unitOfWork.UserDetails.SelectAsync(ud => ud.Id == id)
-            ?? throw new NotFoundException($"UserDetail not found with ID {id}");
-
-        var existUser = await unitOfWork.Users.SelectAsync(u => u.Id == updateModel.UserId)
-            ?? throw new NotFoundException($"User not found with ID {updateModel.UserId}");
-
-        mapper.Map(updateModel, existUserDetail);
-        existUserDetail.Update();
-
-        var updatedUserDetail = await unitOfWork.UserDetails.UpdateAsync(existUserDetail);
-        await unitOfWork.SaveAsync();
-
-        return mapper.Map<UserDetailViewModel>(updatedUserDetail);
-    }
-
+  
     public async Task<bool> DeleteAsync(long id)
     {
         var existUserDetail = await unitOfWork.UserDetails.SelectAsync(ud => ud.Id == id)
