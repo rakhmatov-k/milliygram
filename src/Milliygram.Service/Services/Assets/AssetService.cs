@@ -16,7 +16,7 @@ public class AssetService(IMapper mapper, IUnitOfWork unitOfWork) : IAssetServic
         var asset = new Asset()
         {
             Name = assetData.Name,
-            Path = assetData.Path,
+            Path = $"Asset/{model.FileType.ToString()}/"+assetData.Name,
             FileType = model.FileType
         };
 

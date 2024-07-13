@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Milliygram.Domain.Enums;
-using Milliygram.Service.DTOs.Assets;
+using Microsoft.AspNetCore.Mvc;
 using Milliygram.Service.DTOs.Users;
+using Milliygram.Service.DTOs.Assets;
 using Milliygram.Service.Services.Users;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Milliygram.Web.Controllers;
 
-public class UsersController (IMapper mapper, IUserService userService) : Controller
+public class UsersController 
+    (IMapper mapper, 
+    IUserService userService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -88,19 +90,60 @@ public class UsersController (IMapper mapper, IUserService userService) : Contro
     [HttpPost]
     public async Task<IActionResult> ChangeEmail(string email)
     {
-        // Change email logic
-        var a = email;
-       
-
-        return RedirectToAction("Security", "Users");
+        try
+        {
+            var userId = Convert.ToInt64(User.FindFirst("Id").Value);
+            await userService.UpdateEmailAsync(userId, email);
+            return RedirectToAction("Security", "Users");
+        }
+        catch (Exception ex)
+        {
+            ViewData["ServiceError"] = ex.Message;
+            return RedirectToAction("Security", "Users");
+        }
     }
 
-
-
-
+    [HttpPost]
+    public async Task<IActionResult> ChangePassword(string currentpassword, string newpassword, string confirmpassword)
+    {
+        try
+        {
+            var userId = Convert.ToInt64(User.FindFirst("Id").Value);
+            var changePassword = new ChangePassword
+            {
+                NewPassword = newpassword,
+                Password = currentpassword,
+                ConfirmPassword = confirmpassword
+            };
+            await userService.ChangePasswordAsync(userId, changePassword);
+            return RedirectToAction("Security", "Users");
+        }
+        catch (Exception ex)
+        {
+            ViewData["ServiceError"] = ex.Message;
+            return RedirectToAction("Security", "Users");
+        }
+    }
 
     [HttpPost]
-    public async Task<IActionResult> UploadPicture(IFormFile file)
+    public async Task<IActionResult> DeleteAccount()
+    {
+        try
+        {
+            var userId = Convert.ToInt64(User.FindFirst("Id").Value);
+            await userService.DeleteAsync(userId);
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Accounts");
+        }
+        catch (Exception ex)
+        {
+            ViewData["ServiceError"] = ex.Message;
+            return RedirectToAction("Security", "Users");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadImage(IFormFile file)
     {
         try
         {

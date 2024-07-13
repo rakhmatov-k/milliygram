@@ -315,7 +315,7 @@ namespace Milliygram.Data.Migrations
                             FileType = 0,
                             IsDeleted = false,
                             Name = "Default_Images",
-                            Path = "assets\\Images\\Default_Images.jpg"
+                            Path = "assets/images/Default_Images"
                         });
                 });
 

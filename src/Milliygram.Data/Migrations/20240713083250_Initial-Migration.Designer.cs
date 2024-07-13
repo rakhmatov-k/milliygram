@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712182030_Initial-Migration")]
+    [Migration("20240713083250_Initial-Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -318,7 +318,7 @@ namespace Milliygram.Data.Migrations
                             FileType = 0,
                             IsDeleted = false,
                             Name = "Default_Images",
-                            Path = "assets\\Images\\Default_Images.jpg"
+                            Path = "assets/images/Default_Images"
                         });
                 });
 
@@ -393,8 +393,8 @@ namespace Milliygram.Data.Migrations
                     b.Property<long>("CreatedByUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");

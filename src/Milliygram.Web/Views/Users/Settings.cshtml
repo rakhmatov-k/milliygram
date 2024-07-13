@@ -1,8 +1,29 @@
 ﻿@using Milliygram.Service.DTOs.Users
 @model UserUpdateModel
 
-<div>
+<div class="py-3 pb-4 border-bottom">
     <h4 class="pb-4 border-bottom">Account settings</h4>
+    <div class="d-flex align-items-center">
+        <!-- Show current profile image -->
+        <div class="me-4">
+            <img src="Asset/Images/0e05615b-d636-4d7d-b0d8-b1e9148bd304.JPG" class="rounded-circle" alt="Profile Image" width="150" height="150">
+        </div>
+        <!-- Upload Image Form -->
+        <div>
+            <form asp-action="UploadImage" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="profileImage">Profile Image</label>
+                        <input type="file" class="form-control mb-2" id="profileImage" name="file" accept="image/*" required>
+                        <button class="btn btn-primary mt-2" type="submit">Upload Image</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
     <form asp-action="Settings" method="post" class="form-border-0">
         <div class="py-2">
             <div class="row py-2">
@@ -42,3 +63,6 @@
         </div>
     </form>
 </div>
+<br />
+<br />
+<br />

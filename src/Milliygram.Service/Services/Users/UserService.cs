@@ -125,6 +125,7 @@ public class UserService
         existUser.Update();
         await unitOfWork.Users.UpdateAsync(existUser);
         await unitOfWork.SaveAsync();
+        await unitOfWork.CommitTransactionAsync();
 
         return mapper.Map<UserViewModel>(existUser);
     }
@@ -132,5 +133,42 @@ public class UserService
     public Task<UserViewModel> DeletePictureAsync(long id)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<UserViewModel> UpdateEmailAsync(long id, string email)
+    {
+        var existUser = await unitOfWork.Users.SelectAsync(u => u.Id == id)
+            ?? throw new NotFoundException($"User is not found with this ID {id}");
+
+        var alreadyExistUser = await unitOfWork.Users
+           .SelectAsync(u => u.Email.ToLower() == email.ToLower() && u.Id != id);
+
+        if (alreadyExistUser is not null)
+            throw new AlreadyExistException($"User is already exist with this email {email}");
+
+        existUser.Email = email;
+        existUser.Update();
+        await unitOfWork.Users.UpdateAsync(existUser);
+        await unitOfWork.SaveAsync();
+
+        return mapper.Map<UserViewModel> (existUser);
+    }
+
+    public async Task<UserViewModel> ChangePasswordAsync(long id, ChangePassword changePassword)
+    {
+        var existUser = await unitOfWork.Users.SelectAsync(u => u.Id == id)
+            ?? throw new NotFoundException($"User is not found with this ID {id}");
+
+        if (!PasswordHasher.Verify(changePassword.Password, existUser.Password))
+            throw new ArgumentIsNotValidException("Password is incorrect");
+
+        if (changePassword.NewPassword != changePassword.ConfirmPassword)
+            throw new ArgumentIsNotValidException("Confirm password is incorrect");
+
+        existUser.Password = PasswordHasher.Hash(changePassword.NewPassword);
+        existUser.Update();
+        await unitOfWork.SaveAsync();
+
+        return mapper.Map<UserViewModel>(existUser);
     }
 }

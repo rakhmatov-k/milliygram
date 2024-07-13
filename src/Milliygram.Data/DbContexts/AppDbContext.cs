@@ -25,8 +25,10 @@ public class AppDbContext : DbContext
         {
             Id = 1,
             Name = "Default_Images",
-            Path = @"assets\Images\Default_Images.jpg",
+            Path = "assets/images/" + "Default_Images",
             FileType = Domain.Enums.FileType.Images
         });
+
+        modelBuilder.Entity<User>().HasQueryFilter(user => !user.IsDeleted);
     }
 }
