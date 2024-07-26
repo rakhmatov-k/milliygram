@@ -10,6 +10,14 @@
         <h3 class="mb-0">Security</h3>
         <p class="mb-0">Edit your account settings and change your password here.</p>
     </div>
+    @* Display service error *@
+    @if (ViewData["ServiceError"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>@ViewData["ServiceError"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
     <!-- Card body -->
     <div class="card-body">
         <h4 class="mb-0">Email Address</h4>
@@ -64,7 +72,7 @@
                 <div class="col-12 mt-4">
                     <p class="mb-0">
                         Can't remember your current password?
-                        <a href="#">Reset your password via email</a>
+                        <a href="/Users/ForgotPassword">Reset your password via email</a>
                     </p>
                 </div>
             </form>

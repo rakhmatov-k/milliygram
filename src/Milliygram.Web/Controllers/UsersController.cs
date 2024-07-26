@@ -162,4 +162,103 @@ public class UsersController
             return RedirectToAction("Settings");
         }
     }
+
+    public IActionResult ForgotPassword()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ForgotPassword(ResetPasswordRequest model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        try
+        {
+            //await userService.SendVerificationCodeAsync(model.Email);
+            TempData["Email"] = model.Email;
+            return RedirectToAction("VerifyCode");
+        }
+        catch (Exception ex)
+        {
+            ViewData["ServiceError"] = ex.Message;
+            return View(model);
+        }
+    }
+
+    public IActionResult VerifyCode()
+    {
+        var email = TempData["Email"] as string;
+        if (string.IsNullOrEmpty(email))
+        {
+            return RedirectToAction("ForgotPassword");
+        }
+        var model = new VerifyResetCode { Email = email };
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> VerifyCode(VerifyResetCode model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        try
+        {
+            var isValid = true; //await userService.VerifyCodeAsync(model.Email, model.Code);
+            if (isValid)
+            {
+                TempData["Email"] = model.Email;
+                return RedirectToAction("ResetPassword");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid verification code.");
+                return View(model);
+            }
+        }
+        catch (Exception ex)
+        {
+            ViewData["ServiceError"] = ex.Message;
+            return View(model);
+        }
+    }
+
+
+    public IActionResult ResetPassword()
+    {
+        var email = TempData["Email"] as string;
+        if (string.IsNullOrEmpty(email))
+        {
+            return RedirectToAction("ForgotPassword");
+        }
+        var model = new ResetPasswordModel{ Email = email };
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        try
+        {
+            //await userService.ResetPasswordAsync(model.Email, model.NewPassword);
+            ViewData["Message"] = "Your password has been reset successfully.";
+            return View();
+        }
+        catch (Exception ex)
+        {
+            ViewData["ServiceError"] = ex.Message;
+            return View(model);
+        }
+    }
 }

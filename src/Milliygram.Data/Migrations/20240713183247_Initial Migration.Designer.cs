@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240713083250_Initial-Migration")]
+    [Migration("20240713183247_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -318,7 +318,7 @@ namespace Milliygram.Data.Migrations
                             FileType = 0,
                             IsDeleted = false,
                             Name = "Default_Images",
-                            Path = "assets/images/Default_Images"
+                            Path = "~/assets/Images/Default_Images"
                         });
                 });
 

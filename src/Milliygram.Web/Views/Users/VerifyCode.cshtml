@@ -1,0 +1,24 @@
+﻿@using Milliygram.Service.DTOs.Users
+@model VerifyResetCode
+
+@{
+    ViewData["Title"] = "Verify Code";
+}
+
+<h2>Verify Code</h2>
+
+<div>
+    @if (ViewData["ServiceError"] != null)
+    {
+        <div class="alert alert-danger">@ViewData["ServiceError"]</div>
+    }
+
+    <form asp-action="VerifyCode" method="post">
+        <div class="form-group">
+            <label for="code">Verification Code</label>
+            <input type="text" class="form-control" id="code" asp-for="Code" required />
+        </div>
+        <input type="hidden" asp-for="Email" />
+        <button type="submit" class="btn btn-primary">Verify Code</button>
+    </form>
+</div>

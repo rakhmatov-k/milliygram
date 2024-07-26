@@ -25,7 +25,7 @@ public class AppDbContext : DbContext
         {
             Id = 1,
             Name = "Default_Images",
-            Path = "assets/images/" + "Default_Images",
+            Path = "~/assets/Images/" + "Default_Images",
             FileType = Domain.Enums.FileType.Images
         });
 
