@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 using Milliygram.Data.UnitOfWorks;
 using Milliygram.Domain.Entities.Users;
 using Milliygram.Service.DTOs.Assets;
@@ -16,9 +17,11 @@ namespace Milliygram.Service.Services.Users;
 public class UserService
     (IMapper mapper,
     IUnitOfWork unitOfWork,
+    IMemoryCache memoryCache,
     IAssetService assetService,
     IUserDetailService userDetailService) : IUserService
 {
+    private readonly string cacheKey = "EmailCodeKey";
     public async Task<UserViewModel> CreateAsync(UserCreateModel createModel)
     {
         await unitOfWork.BeginTransactionAsync();
@@ -170,5 +173,51 @@ public class UserService
         await unitOfWork.SaveAsync();
 
         return mapper.Map<UserViewModel>(existUser);
+    }
+
+    public async Task<bool> SendVerificationCodeAsync(ResetPasswordRequest model)
+    {
+        var user = await unitOfWork.Users.SelectAsync(user => user.Email == model.Email)
+           ?? throw new NotFoundException($"User is not found with this email = {model.Email}");
+
+        var random = new Random();
+        var code = random.Next(10000, 99999);
+        await EmailHelper.SendMessageAsync(user.Email, "Confirmation Code", code.ToString());
+
+        var memoryCacheOptions = new MemoryCacheEntryOptions()
+             .SetSize(50)
+             .SetAbsoluteExpiration(TimeSpan.FromSeconds(100))
+             .SetSlidingExpiration(TimeSpan.FromSeconds(50))
+             .SetPriority(CacheItemPriority.Normal);
+
+        memoryCache.Set(cacheKey, code.ToString(), memoryCacheOptions);
+
+        return true;
+    }
+
+    public async Task<bool> VerifyCodeAsync(VerifyResetCode model)
+    {
+        var user = await unitOfWork.Users.SelectAsync(user => user.Email == model.Email)
+          ?? throw new NotFoundException($"User is not found with this email = {model.Email}");
+
+        if (memoryCache.Get(cacheKey) as string == model.Code)
+            return true;
+
+        return false;
+    }
+
+    public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
+    {
+        var user = await unitOfWork.Users.SelectAsync(user => user.Email == model.Email)
+         ?? throw new NotFoundException($"User is not found with this email = {model.Email}");
+
+        if (model.NewPassword != model.ConfirmPassword)
+            throw new ArgumentIsNotValidException("Confirm password is incorrect");
+
+        user.Password = PasswordHasher.Hash(model.NewPassword);
+        await unitOfWork.Users.UpdateAsync(user);
+        await unitOfWork.SaveAsync();
+
+        return true;
     }
 }
