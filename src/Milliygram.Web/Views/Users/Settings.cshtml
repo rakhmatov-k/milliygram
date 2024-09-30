@@ -51,17 +51,17 @@
                 </div>
                 <div class="col-md-6 pt-md-0 pt-3">
                     <label for="Detail_Bio">Bio</label>
-                    <input type="text" class="bg-light form-control bio-button" asp-for="Detail.Bio" placeholder="@Model.Detail.Bio">
+                    <input type="text" class="bg-light form-control bio-button" asp-for="Detail.Bio" placeholder="@Model.Detail?.Bio">
                 </div>
             </div>
             <div class="row py-2">
                 <div class="col-md-6">
                     <label for="Detail_DateOfBirth">Date of Birth</label>
-                    <input type="date" class="bg-light form-control" asp-for="Detail.DateOfBirth" placeholder="@Model.Detail.DateOfBirth?.ToString("yyyy-MM-dd")">
+                    <input type="date" class="bg-light form-control" asp-for="Detail.DateOfBirth" placeholder="@Model.Detail?.DateOfBirth?.ToString("yyyy-MM-dd")">
                 </div>
                 <div class="col-md-6 pt-md-0 pt-3">
                     <label for="Detail_Location">Location</label>
-                    <input type="text" class="bg-light form-control" asp-for="Detail.Location" placeholder="@Model.Detail.Location">
+                    <input type="text" class="bg-light form-control" asp-for="Detail.Location" placeholder="@Model.Detail?.Location">
                 </div>
             </div>
             <div class="py-3 pb-4 border-bottom">
