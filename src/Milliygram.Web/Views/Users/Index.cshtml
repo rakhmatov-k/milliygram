@@ -5,7 +5,6 @@
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
-
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
@@ -15,18 +14,10 @@
                 </div>
             </div>
             <div class="sidebar-header">
-                <div class="user-pic">
-                    @if(Model.Picture is null)
-                    {
-                        <img class="img-responsive img-rounded" src="https://assets.leetcode.com/users/default_avatar.jpg"
-                        alt="User picture">
-                    }
-                    else
-                    {
-                        <img class="img-responsive img-rounded" src=@Model.Picture.Path
-                             alt="User picture">
-                    }
-                </div>
+               @*  <div class="user-pic">
+                    <img class="img-responsive img-rounded" src="@Model.Picture.Path" alt="User picture">
+                </div> *@
+
                 <div class="user-info">
                     <span class="user-name">
                         @Model.FirstName
@@ -45,6 +36,12 @@
                         <span>General</span>
                     </li>
                     <li class="sidebar-dropdown">
+                        <a href="/Users/Profile">
+                            <i class="fas fa-user"></i> <!-- Profile icon -->
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="fas fa-users"></i> <!-- New Group icon -->
                             <span>New Group</span>
@@ -58,20 +55,19 @@
                         </a>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="#">
+                        <a href="/Users/Settings">
                             <i class="fas fa-cog"></i> <!-- Settings icon -->
                             <span>Settings</span>
                         </a>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="#">
-                            <i class="fas fa-user"></i> <!-- Profile icon -->
-                            <span>Profile</span>
+                        <a href="/Users/Security">
+                            <i class="fas fa-shield-alt"></i> <!-- Security icon -->
+                            <span>Security</span>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
     </nav>
 

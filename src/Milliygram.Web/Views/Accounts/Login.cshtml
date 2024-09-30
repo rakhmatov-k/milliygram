@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Login";
 }
+
 <br />
 <br />
 <h2 class="text-center">Login</h2>
@@ -17,20 +18,19 @@
 }
 
 <div class="d-flex justify-content-center">
-
-    <form class="custom-width" asp-action="Login" method="post">
+    <form class="custom-width" asp-action="Login" method="post" class="form-border-0">
         <!-- UserName input -->
-        <div data-mdb-input-init class="form-outline mb-4">
-            <input asp-for="UserName" class="form-control border" />
+        <div class="form-outline mb-4">
+            <label for="UserName">User Name</label>
+            <input type="text" class="bg-light form-control" asp-for="UserName">
             <span asp-validation-for="UserName" class="text-danger"></span>
-            <label class="form-label" for="UserName">UserName</label>
         </div>
 
         <!-- Password input -->
-        <div data-mdb-input-init class="form-outline mb-4">
-            <input asp-for="Password" class="form-control border" />
+        <div class="form-outline mb-4">
+            <label for="Password">Password</label>
+            <input type="password" class="bg-light form-control" asp-for="Password">
             <span asp-validation-for="Password" class="text-danger"></span>
-            <label class="form-label" for="Password">Password</label>
         </div>
 
         <!-- 2 column grid layout for inline styling -->
@@ -45,7 +45,7 @@
 
             <div class="col">
                 <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
+                <a href="/Users/ForgotPassword">Forgot password?</a>
             </div>
         </div>
 
@@ -56,4 +56,4 @@
             <p>Not a member? <a asp-controller="Accounts" asp-action="Register">Register</a></p>
         </div>
     </form>
-</div>
+ </div>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Milliygram.Service.DTOs.UserDetails;
+using System.ComponentModel.DataAnnotations;
 
 namespace Milliygram.Service.DTOs.Users;
 
@@ -20,4 +21,5 @@ public class UserCreateModel
     [Required(ErrorMessage = "Password is required.")]
     [DataType(DataType.Password)]
     public string Password { get; set; }
+    public UserDetailCreateModel Detail { get; set; }
 }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Milliygram.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240706101028_initial migration2")]
-    partial class initialmigration2
+    [Migration("20240713183247_Initial Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -308,6 +308,18 @@ namespace Milliygram.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Assets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedByUserId = 0L,
+                            FileType = 0,
+                            IsDeleted = false,
+                            Name = "Default_Images",
+                            Path = "~/assets/Images/Default_Images"
+                        });
                 });
 
             modelBuilder.Entity("Milliygram.Domain.Entities.Users.User", b =>
@@ -381,8 +393,8 @@ namespace Milliygram.Data.Migrations
                     b.Property<long>("CreatedByUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
