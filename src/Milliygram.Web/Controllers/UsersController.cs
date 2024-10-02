@@ -178,7 +178,7 @@ public class UsersController
 
         try
         {
-            //await userService.SendVerificationCodeAsync(model.Email);
+            await userService.SendVerificationCodeAsync(model);
             TempData["Email"] = model.Email;
             return RedirectToAction("VerifyCode");
         }
