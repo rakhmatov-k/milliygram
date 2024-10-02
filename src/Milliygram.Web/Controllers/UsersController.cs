@@ -251,9 +251,9 @@ public class UsersController
 
         try
         {
-            //await userService.ResetPasswordAsync(model.Email, model.NewPassword);
+            await userService.ResetPasswordAsync(model);
             ViewData["Message"] = "Your password has been reset successfully.";
-            return View();
+            return RedirectToAction("Login", "Accounts");
         }
         catch (Exception ex)
         {
