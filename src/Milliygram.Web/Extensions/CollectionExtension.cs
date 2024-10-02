@@ -20,5 +20,9 @@ public static class CollectionExtension
     public static void InjectEnvironmentItems(this WebApplication app)
     {
         EnvironmentHelper.WebRootPath = Path.GetFullPath("wwwroot");
+        EnvironmentHelper.SmtpHost = app.Configuration.GetSection("Email:Host").Value;
+        EnvironmentHelper.SmtpPort = app.Configuration.GetSection("Email:Port").Value;
+        EnvironmentHelper.EmailAddress = app.Configuration.GetSection("Email:EmailAddress").Value;
+        EnvironmentHelper.EmailPassword = app.Configuration.GetSection("Email:Password").Value;
     }
 }

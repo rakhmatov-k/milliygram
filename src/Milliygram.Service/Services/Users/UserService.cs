@@ -182,7 +182,7 @@ public class UserService
 
         var random = new Random();
         var code = random.Next(10000, 99999);
-        await EmailHelper.SendMessageAsync(user.Email, "Confirmation Code", code.ToString());
+        await EmailHelper.SendMessageAsync(user.Email, "ConfirmationCode", code.ToString());
 
         var memoryCacheOptions = new MemoryCacheEntryOptions()
              .SetSize(50)
@@ -200,7 +200,8 @@ public class UserService
         var user = await unitOfWork.Users.SelectAsync(user => user.Email == model.Email)
           ?? throw new NotFoundException($"User is not found with this email = {model.Email}");
 
-        if (memoryCache.Get(cacheKey) as string == model.Code)
+        var key = memoryCache.Get(cacheKey) as string;
+        if (key == model.Code)
             return true;
 
         return false;

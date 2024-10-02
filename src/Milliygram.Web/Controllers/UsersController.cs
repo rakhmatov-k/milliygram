@@ -178,7 +178,7 @@ public class UsersController
 
         try
         {
-            //await userService.SendVerificationCodeAsync(model.Email);
+            await userService.SendVerificationCodeAsync(model);
             TempData["Email"] = model.Email;
             return RedirectToAction("VerifyCode");
         }
@@ -210,7 +210,7 @@ public class UsersController
 
         try
         {
-            var isValid = true; //await userService.VerifyCodeAsync(model.Email, model.Code);
+            var isValid = await userService.VerifyCodeAsync(model);
             if (isValid)
             {
                 TempData["Email"] = model.Email;
@@ -251,9 +251,9 @@ public class UsersController
 
         try
         {
-            //await userService.ResetPasswordAsync(model.Email, model.NewPassword);
+            await userService.ResetPasswordAsync(model);
             ViewData["Message"] = "Your password has been reset successfully.";
-            return View();
+            return RedirectToAction("Login", "Accounts");
         }
         catch (Exception ex)
         {
