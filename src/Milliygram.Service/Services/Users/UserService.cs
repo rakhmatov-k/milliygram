@@ -200,7 +200,8 @@ public class UserService
         var user = await unitOfWork.Users.SelectAsync(user => user.Email == model.Email)
           ?? throw new NotFoundException($"User is not found with this email = {model.Email}");
 
-        if (memoryCache.Get(cacheKey) as string == model.Code)
+        var key = memoryCache.Get(cacheKey) as string;
+        if (key == model.Code)
             return true;
 
         return false;

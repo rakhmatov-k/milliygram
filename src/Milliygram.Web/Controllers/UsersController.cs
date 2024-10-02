@@ -210,7 +210,7 @@ public class UsersController
 
         try
         {
-            var isValid = true; //await userService.VerifyCodeAsync(model.Email, model.Code);
+            var isValid = await userService.VerifyCodeAsync(model);
             if (isValid)
             {
                 TempData["Email"] = model.Email;
