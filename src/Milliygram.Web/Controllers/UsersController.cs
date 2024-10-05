@@ -18,7 +18,7 @@ public class UsersController
         {
             long userId = Convert.ToInt64(HttpContext.User.FindFirst("Id").Value);
             var user = await userService.GetByIdAsync(userId);
-            return View(user); ;
+            return View(user); 
         }
         catch (Exception ex)
         {
@@ -33,7 +33,7 @@ public class UsersController
         {
             long userId = Convert.ToInt64(HttpContext.User.FindFirst("Id").Value);
             var user = await userService.GetByIdAsync(userId);
-            return View(user); ;
+            return View(user); 
         }
         catch (Exception ex)
         {
